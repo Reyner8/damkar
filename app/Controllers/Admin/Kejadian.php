@@ -33,7 +33,7 @@ class Kejadian extends BaseController
     // route : admin/kejadian/edit/(:num)
     public function edit($id)
     {
-        return view('admin/kejadain', [
+        return view('admin/kejadian', [
             'judul' => 'Admin | Kejadian',
             'validation' => \Config\Services::validation(),
             'listKejadian' => $this->RelationTable->getAllKejadian(),
@@ -46,6 +46,7 @@ class Kejadian extends BaseController
     // route : admin/petugas/save
     public function save()
     {
+        $idKelurahan = $this->request->getPost('idKelurahan');
         $alamat = $this->request->getPost('alamat');
         $latitude = $this->request->getPost('latitude');
         $longitude = $this->request->getPost('longitude');
@@ -55,7 +56,8 @@ class Kejadian extends BaseController
         $jamTanggap = $this->request->getPost('jamTanggap');
 
         $rules = [
-            'alamat' => 'required',
+            'idKelurahan' => 'required',
+            'alamat ' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
             'penyebab' => 'required',
@@ -70,6 +72,7 @@ class Kejadian extends BaseController
         }
 
         $this->KejadianModel->save([
+            'idKelurahan' => $idKelurahan,
             'alamat' => $alamat,
             'latitude' => $latitude,
             'longitude' => $longitude,
@@ -87,6 +90,7 @@ class Kejadian extends BaseController
     // route : admin/kejadian/edit/(:num)
     public function update($id)
     {
+        $idKelurahan = $this->request->getPost('idKelurahan');
         $alamat = $this->request->getPost('alamat');
         $latitude = $this->request->getPost('latitude');
         $longitude = $this->request->getPost('longitude');
@@ -96,6 +100,7 @@ class Kejadian extends BaseController
         $jamTanggap = $this->request->getPost('jamTanggap');
 
         $rules = [
+            'idKelurahan' => 'required',
             'alamat' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
@@ -111,6 +116,7 @@ class Kejadian extends BaseController
         }
 
         $this->KejadianModel->update($id, [
+            'idKelurahan' => $idKelurahan,
             'alamat' => $alamat,
             'latitude' => $latitude,
             'longitude' => $longitude,

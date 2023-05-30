@@ -48,7 +48,7 @@ class RelationTable
         return $this->db->table('kejadian')->select('kejadian.*, kelurahan.nama AS namaKelurahan')
             ->join('kelurahan', 'kejadian.idKelurahan = kelurahan.id')
             ->where('kejadian.id', $id)
-            ->get()->getResultArray();
+            ->get()->getRowArray();
     }
 
     // examples
