@@ -51,6 +51,25 @@ class RelationTable
             ->get()->getRowArray();
     }
 
+    public function getAllPenugasan()
+    {
+        return $this->db->table('penugasan')->select('penugasan.*, petugas.nama AS namaPetugas, regu.nama AS namaRegu, kejadian.nama AS namaKejadian')
+        ->join('petugas', 'petugas.id = penugasan.idPetugas')
+        ->join('regu', 'regu.id = penugasan.idRegu')
+        ->join('kejadian', 'kejadian.id = penugasan.idPenugasan')
+        ->get()->getResultArray();
+    }
+
+    public function getPenugasanById($id)
+    {
+        return $this->db->table('penugasan')->select('penugasan.*, petugas.nama AS namaPetugas, regu.nama AS namaRegu, kejadian.nama AS namaKejadian')
+        ->join('petugas', 'petugas.id = penugasan.idPetugas')
+        ->join('regu', 'regu.id = penugasan.idRegu')
+        ->join('kejadian', 'kejadian.id = penugasan.idPenugasan')
+        ->where('penugasan.id', $id)
+        ->get()->getRowArray();
+    }
+
     // examples
 
 

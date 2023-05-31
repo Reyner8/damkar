@@ -88,6 +88,14 @@ $routes->group('/admin', static function ($routes) {
         $routes->get('edit/(:num)', 'Admin\Kejadian::edit/$1');
         $routes->put('edit/(:num)', 'Admin\Kejadian::update/$1');
         $routes->delete('(:num)', 'Admin\Kejadian::delete/$1');
+
+        $routes->group('penugasan', static function ($routes) {
+            $routes->get('/', 'Admin\Penugasan::penugasan');
+            $routes->post('/', 'Admin\Penugasan::save');
+            $routes->get('edit/(:num)', 'Admin\Penugasan::edit/$1');
+            $routes->put('edit/(:num)', 'Admin\Penugasan::update/$1');
+            $routes->delete('(:num)', 'Admin\Penugasan::delete/$1');
+        });
     });
 });
 
