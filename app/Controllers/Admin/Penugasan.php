@@ -8,33 +8,41 @@ class Penugasan extends BaseController
 {
     protected $RelationTable;
     protected $PenugasanModel;
+    protected $KejadianModel;
     protected $JabatanModel;
+    protected $PetugasModel;
 
     public function __construct()
     {
         $this->RelationTable = new \App\Models\RelationTable();
         $this->PenugasanModel = new \App\Models\PenugasanModel();
+        $this->KejadianModel = new \App\Models\KejadianModel();
         $this->JabatanModel = new \App\Models\JabatanModel();
+        $this->PetugasModel = new \App\Models\PetugasModel();
     }
 
-    public function penugasan($id)
+    public function penugasan($idKejadian)
     {
+
         return view('admin/penugasan', [
             'judul' => 'Admin | Penugasan',
             'validation' => \Config\Services::validation(),
-            'listPenugasan' => $this->RelationTable->getAllPenugasan(),
+            'listPenugasan' => $this->RelationTable->getPenugasanByIdKejadian($idKejadian),
+            'kejadian' => $this->KejadianModel->find($idKejadian),
+            'listPetugas' => $this->PetugasModel->findAll(),
             'isEdit' => false
         ]);
     }
 
     // route : admin/kejadian/edit/(:num)
-    public function edit($id)
+    public function edit()
     {
+
         return view('admin/kejadian', [
             'judul' => 'Admin | Kejadian',
             'validation' => \Config\Services::validation(),
-            'listPenugasan' => $this->RelationTable->getAllPenugasan(),
-            'dataEdit' => $this->RelationTable->getPenugasanById($id),
+            'listPenugasan' => $this->RelationTable->getPenugasanByIdKejadian($idKejadian),
+            'dataEdit' => $this->RelationTable->getPenugasanById($idPenugasan),
             'isEdit' => true
         ]);
     }

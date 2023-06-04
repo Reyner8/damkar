@@ -90,9 +90,10 @@ $routes->group('/admin', static function ($routes) {
         $routes->delete('(:num)', 'Admin\Kejadian::delete/$1');
 
         $routes->group('penugasan', static function ($routes) {
-            $routes->get('/', 'Admin\Penugasan::penugasan');
-            $routes->post('/', 'Admin\Penugasan::save');
-            $routes->get('edit/(:num)', 'Admin\Penugasan::edit/$1');
+            $routes->get('(:num)', 'Admin\Penugasan::penugasan/$1');
+            $routes->post('(:num)', 'Admin\Penugasan::save/$1');
+            // idKejadian/idPenugasan
+            $routes->get('edit/(:num)/(:num)', 'Admin\Penugasan::edit/$1/$2');
             $routes->put('edit/(:num)', 'Admin\Penugasan::update/$1');
             $routes->delete('(:num)', 'Admin\Penugasan::delete/$1');
         });
