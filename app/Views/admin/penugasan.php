@@ -36,6 +36,18 @@
                         </div>
                         <form action="/admin/kejadian/penugasan/<?= $kejadian['id'] ?>" method="post" enctype="multipart/form-data">
                             <hr>
+                            <div class="mb-4">
+                                <label for="regu">Regu</label>
+                                <select name="idRegu" id="regu" class="form-control">
+                                    <?php foreach($listRegu as $regu): ?>
+                                        <option value="<?= $regu['id']  ?>"><?= $regu['nama'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="tanggal">Tanggal Penugasan</label>
+                                <input type="date" class="form-control" name="tanggalPenugasan" placeholder="Tanggal penugasan ...">
+                            </div>
                             <div id="petugas-container" class="mb-4">
                                 <label for="petugas">Petugas</label>
                                 <select class="form-control mb-2" name="idPetugas[]" id="petugas">
@@ -73,9 +85,7 @@
                                     <td><?= $penugasan['namaPetugas'] ?></td>
                                     <td><?= $penugasan['namaRegu'] ?></td>
                                     <td><?= $penugasan['tanggalPenugasan'] ?></td>
-                                    <td>
-                                        <a class="btn btn-outline-warning btn-sm" href="/admin/kejadian/penugasan/edit/<?= $penugasan['idKejadian'] ?>/<?= $penugasan['id'] ?>"><i class="fa fa-pencil"></i></a>
-
+                                    <td> 
                                         <form class="d-inline-block" action="/admin/petugas/<?= $penugasan['id'] ?>" method="post">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>

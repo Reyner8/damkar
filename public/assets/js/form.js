@@ -3,10 +3,17 @@
 const validateBtn = document.getElementById('validate-btn'); 
 validateBtn.addEventListener('click', (e) => {
   e.preventDefault;
+
   const valueInput = document.getElementById('number').value;
+  const petugasContainer = document.getElementById('petugas-container');
+  const node = document.getElementById('petugas');
+
+  while(petugasContainer.hasChildNodes()){
+    petugasContainer.removeChild(petugasContainer.firstChild);
+  }
+  
   for (let i = 0; i < valueInput; i++) {
-    const node = document.getElementById('petugas');
     const clone = node.cloneNode(true);
-    document.getElementById('petugas-container').appendChild(clone);  
+    petugasContainer.appendChild(clone);  
   }
 });

@@ -11,6 +11,7 @@ class Penugasan extends BaseController
     protected $KejadianModel;
     protected $JabatanModel;
     protected $PetugasModel;
+    protected $ReguModel;
 
     public function __construct()
     {
@@ -19,6 +20,7 @@ class Penugasan extends BaseController
         $this->KejadianModel = new \App\Models\KejadianModel();
         $this->JabatanModel = new \App\Models\JabatanModel();
         $this->PetugasModel = new \App\Models\PetugasModel();
+        $this->ReguModel = new \App\Models\ReguModel();
     }
 
     public function penugasan($idKejadian)
@@ -30,6 +32,7 @@ class Penugasan extends BaseController
             'listPenugasan' => $this->RelationTable->getPenugasanByIdKejadian($idKejadian),
             'kejadian' => $this->KejadianModel->find($idKejadian),
             'listPetugas' => $this->PetugasModel->findAll(),
+            'listRegu' => $this->ReguModel->findAll(),
             'isEdit' => false
         ]);
     }
@@ -48,34 +51,34 @@ class Penugasan extends BaseController
     }
 
     // route : admin/petugas/save
-    public function save()
+    public function save($idKejadian)
     {
         $idPetugas = $this->request->getPost('idPetugas');
         $idRegu = $this->request->getPost('idRegu');
-        $idKejadian = $this->request->getPost('idKejadian');
         $tanggalPenugasan = $this->request->getPost('tanggalPenugasan');
 
         $rules = [
             'idPetugas' => 'required',
             'idRegu' => 'required',
-            'idKejadian' => 'required',
             'tanggalPenugasan' => 'required',
         ];
 
         if (!$this->validate($rules)) {
             session()->setFlashdata('msg-danger', 'Data gagal ditambahkan!!!');
-            return redirect()->to('admin/')->withInput();
+            return redirect()->to('admin/kejadian/penugasan/'. $idKejadian)->withInput();
         }
 
-        $this->PenugasanModel->save([
-            'idPetugas' => $idPetugas,
-            'idRegu' => $idRegu,
-            'idKejadian' => $idKejadian,
-            'tanggalPenugasan' => $tanggalPenugasan,
-        ]);
+      foreach ($idPetugas as $petugas) { 
+          $this->PenugasanModel->save([
+              'idPetugas' => $petugas,
+              'idRegu' => $idRegu,
+              'idKejadian' => $idKejadian,
+              'tanggalPenugasan' => $tanggalPenugasan,
+            ]);
+        }
 
         session()->setFlashdata('msg-success', 'Data berhasil ditambahkan!!!');
-        return redirect()->to('admin/kejadian');
+        return redirect()->to('admin/kejadian/penugasan/'. $idKejadian);
     }
 
 
