@@ -86,7 +86,7 @@
                                     <td><?= $penugasan['namaRegu'] ?></td>
                                     <td><?= $penugasan['tanggalPenugasan'] ?></td>
                                     <td> 
-                                        <form class="d-inline-block" action="/admin/petugas/<?= $penugasan['id'] ?>" method="post">
+                                        <form class="d-inline-block" action="/admin/kejadian/penugasan/<?= $penugasan['id'] ?>" method="post">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
                                         </form>

@@ -129,8 +129,9 @@ class Penugasan extends BaseController
     // route : admin/kejadian/(:num)
     public function delete($id)
     {
-        $this->KejadianModel->where('id', $id)->delete();
+        $idKejadian = $this->PenugasanModel->find($id)['idKejadian'];
+        $this->PenugasanModel->where('id', $id)->delete();
         session()->setFlashdata('msg-delete', 'Data berhasil dihapus!!!');
-        return redirect()->to('admin/kejadian');
+        return redirect()->to('admin/kejadian/penugasan/'. $idKejadian);
     }
 }
