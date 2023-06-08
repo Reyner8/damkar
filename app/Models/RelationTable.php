@@ -80,6 +80,14 @@ class RelationTable
             ->get()->getResultArray();
     }
 
+    public function getDokumentasiByIdKejadian($id)
+    {
+        return $this->db->table('dokumentasi')->select('dokumentasi.*')
+            ->join('kejadian', 'kejadian.id = dokumentasi.idKejadian')
+            ->where('dokumentasi.idKejadian', $id)
+            ->get()->getResultArray();
+    }
+
     // examples
 
 
