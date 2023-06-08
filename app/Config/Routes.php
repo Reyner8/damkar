@@ -93,8 +93,6 @@ $routes->group('/admin', static function ($routes) {
             $routes->get('(:num)', 'Admin\Penugasan::penugasan/$1');
             $routes->post('(:num)', 'Admin\Penugasan::save/$1');
             // idKejadian/idPenugasan
-            $routes->get('edit/(:num)/(:num)', 'Admin\Penugasan::edit/$1/$2');
-            $routes->put('edit/(:num)', 'Admin\Penugasan::update/$1');
             $routes->delete('(:num)', 'Admin\Penugasan::delete/$1');
         });
     });

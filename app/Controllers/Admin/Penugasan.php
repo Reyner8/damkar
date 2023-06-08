@@ -37,19 +37,6 @@ class Penugasan extends BaseController
         ]);
     }
 
-    // route : admin/kejadian/edit/(:num)
-    public function edit()
-    {
-
-        return view('admin/kejadian', [
-            'judul' => 'Admin | Kejadian',
-            'validation' => \Config\Services::validation(),
-            'listPenugasan' => $this->RelationTable->getPenugasanByIdKejadian($idKejadian),
-            'dataEdit' => $this->RelationTable->getPenugasanById($idPenugasan),
-            'isEdit' => true
-        ]);
-    }
-
     // route : admin/petugas/save
     public function save($idKejadian)
     {
@@ -65,66 +52,21 @@ class Penugasan extends BaseController
 
         if (!$this->validate($rules)) {
             session()->setFlashdata('msg-danger', 'Data gagal ditambahkan!!!');
-            return redirect()->to('admin/kejadian/penugasan/'. $idKejadian)->withInput();
+            return redirect()->to('admin/kejadian/penugasan/' . $idKejadian)->withInput();
         }
 
-      foreach ($idPetugas as $petugas) { 
-          $this->PenugasanModel->save([
-              'idPetugas' => $petugas,
-              'idRegu' => $idRegu,
-              'idKejadian' => $idKejadian,
-              'tanggalPenugasan' => $tanggalPenugasan,
+        foreach ($idPetugas as $petugas) {
+            $this->PenugasanModel->save([
+                'idPetugas' => $petugas,
+                'idRegu' => $idRegu,
+                'idKejadian' => $idKejadian,
+                'tanggalPenugasan' => $tanggalPenugasan,
             ]);
         }
 
         session()->setFlashdata('msg-success', 'Data berhasil ditambahkan!!!');
-        return redirect()->to('admin/kejadian/penugasan/'. $idKejadian);
+        return redirect()->to('admin/kejadian/penugasan/' . $idKejadian);
     }
-
-
-    // route : admin/kejadian/edit/(:num)
-    public function update($id)
-    {
-        $idKelurahan = $this->request->getPost('idKelurahan');
-        $alamat = $this->request->getPost('alamat');
-        $latitude = $this->request->getPost('latitude');
-        $longitude = $this->request->getPost('longitude');
-        $penyebab = $this->request->getPost('penyebab');
-        $tanggal = $this->request->getPost('tanggal');
-        $jamLapor = $this->request->getPost('jamLapor');
-        $jamTanggap = $this->request->getPost('jamTanggap');
-
-        $rules = [
-            'idKelurahan' => 'required',
-            'alamat' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
-            'penyebab' => 'required',
-            'tanggal' => 'required',
-            'jamLapor' => 'required',
-            'jamTanggap' => 'required',
-        ];
-
-        if (!$this->validate($rules)) {
-            session()->setFlashdata('msg-danger', 'Data gagal diubah !!!');
-            return redirect()->to('admin/kejadian/edit/' . $id)->withInput();
-        }
-
-        $this->KejadianModel->update($id, [
-            'idKelurahan' => $idKelurahan,
-            'alamat' => $alamat,
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-            'penyebab' => $penyebab,
-            'tanggal' => $tanggal,
-            'jamLapor' => $jamLapor,
-            'jamTanggap' => $jamTanggap,
-        ]);
-
-        session()->setFlashdata('msg-success', 'Data berhasil diubah!!!');
-        return redirect()->to('admin/kejadian');
-    }
-
 
     // route : admin/kejadian/(:num)
     public function delete($id)
@@ -132,6 +74,6 @@ class Penugasan extends BaseController
         $idKejadian = $this->PenugasanModel->find($id)['idKejadian'];
         $this->PenugasanModel->where('id', $id)->delete();
         session()->setFlashdata('msg-delete', 'Data berhasil dihapus!!!');
-        return redirect()->to('admin/kejadian/penugasan/'. $idKejadian);
+        return redirect()->to('admin/kejadian/penugasan/' . $idKejadian);
     }
 }
