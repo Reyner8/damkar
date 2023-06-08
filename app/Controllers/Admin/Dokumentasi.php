@@ -18,7 +18,7 @@ class Dokumentasi extends BaseController
         
     }
 
-    public function penugasan($idKejadian)
+    public function dokumentasi($idKejadian)
     {
 
         return view('admin/dokumentasi', [
