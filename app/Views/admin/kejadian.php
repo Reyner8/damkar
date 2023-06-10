@@ -183,6 +183,7 @@
                                     <td><?= $kejadian['jamTanggap'] ?></td>
                                     <td>
                                         <a class="btn btn-outline-info btn-sm" href="/admin/kejadian/penugasan/<?= $kejadian['id'] ?>"><i class="fa fa-info"></i></a>
+                                        <a class="btn btn-outline-secondary btn-sm" href="/admin/kejadian/dokumentasi/<?= $kejadian['id'] ?>"><i class="fa fa-upload"></i></a>
                                         <a class="btn btn-outline-warning btn-sm" href="/admin/kejadian/edit/<?= $kejadian['id'] ?>"><i class="fa fa-pencil"></i></a>
 
                                         <form class="d-inline-block" action="/admin/kejadian/<?= $kejadian['id'] ?>" method="post">

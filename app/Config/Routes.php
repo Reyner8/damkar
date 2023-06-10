@@ -95,6 +95,12 @@ $routes->group('/admin', static function ($routes) {
             // idKejadian/idPenugasan
             $routes->delete('(:num)', 'Admin\Penugasan::delete/$1');
         });
+
+        $routes->group('dokumentasi', static function ($routes) {
+            $routes->get('(:num)', 'Admin\Dokumentasi::dokumentasi/$1');
+            $routes->post('(:num)', 'Admin\Dokumentasi::save/$1');
+            $routes->delete('(:num)', 'Admin\Dokumentasi::delete/$1');
+        });
     });
 });
 
