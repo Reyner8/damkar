@@ -14,7 +14,7 @@
     <title><?= $judul ?></title>
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column vh-100 bg_pattern">
 
     <?= $this->include('admin/layouts/navbar') ?>
     <?= $this->renderSection('content') ?>
@@ -24,7 +24,9 @@
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MgLuZuyqR_OGY3ob3M52N46TDBRI_9k&callback=initMap" async defer></script>
     <script src="/assets/js/form.js"></script>
+    <script src="/assets/js/maps.js"></script>
 </body>
 
 </html>

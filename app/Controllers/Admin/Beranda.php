@@ -10,12 +10,16 @@ class Beranda extends BaseController
     protected $KejadianModel;
     protected $KelurahanModel;
     protected $KecamatanModel;
+    protected $PetugasModel;
+    protected $RelationTable;
 
     public function __construct()
     {
         $this->KejadianModel = new \App\Models\KejadianModel();
         $this->KelurahanModel = new \App\Models\KelurahanModel();
         $this->KecamatanModel = new \App\Models\KecamatanModel();
+        $this->PetugasModel = new \App\Models\PetugasModel();
+        $this->RelationTable = new \App\Models\RelationTable();
     }
 
 
@@ -26,6 +30,13 @@ class Beranda extends BaseController
             'listKejadian' => $this->KejadianModel->findAll(),
             'listKelurahan' => $this->KelurahanModel->findAll(),
             'listKecamatan' => $this->KecamatanModel->findAll(),
+            'listPetugas' => $this->PetugasModel->findAll(),
         ]);
+    }
+
+    public function lokasi()
+    {
+        $listKejadian = $this->RelationTable->getAllKejadian();
+        return $this->response->setJSON($listKejadian);
     }
 }

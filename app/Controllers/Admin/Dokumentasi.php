@@ -8,14 +8,13 @@ class Dokumentasi extends BaseController
 {
     protected $RelationTable;
     protected $KejadianModel;
-    protected $DokumentasiModel;    
+    protected $DokumentasiModel;
 
     public function __construct()
     {
         $this->RelationTable = new \App\Models\RelationTable();
         $this->KejadianModel = new \App\Models\KejadianModel();
         $this->DokumentasiModel = new \App\Models\DokumentasiModel();
-        
     }
 
     public function dokumentasi($idKejadian)
@@ -32,15 +31,13 @@ class Dokumentasi extends BaseController
     // route : admin/petugas/save
     public function save($idKejadian)
     {
-//         $files = $this->request->getFileMultiple('files');
-// dd($files);
         $rules = [
             'files' => ['uploaded[files]'],
         ];
 
         if (!$this->validate($rules)) {
             session()->setFlashdata('msg-danger', 'Data gagal ditambahkan!!!');
-            return redirect()->to('admin/kejadian/dokumentasi/'. $idKejadian)->withInput();
+            return redirect()->to('admin/kejadian/dokumentasi/' . $idKejadian)->withInput();
         }
 
         if ($imagefile = $this->request->getFiles()) {
@@ -55,13 +52,13 @@ class Dokumentasi extends BaseController
                     ]);
                 }
             }
-        }else{
+        } else {
             session()->setFlashdata('msg-danger', 'Data gagal diupload!!!');
-            return redirect()->to('admin/kejadian/dokumentasi/'. $idKejadian)->withInput();
+            return redirect()->to('admin/kejadian/dokumentasi/' . $idKejadian)->withInput();
         }
 
         session()->setFlashdata('msg-success', 'Data berhasil diupload!!!');
-        return redirect()->to('admin/kejadian/dokumentasi/'. $idKejadian);
+        return redirect()->to('admin/kejadian/dokumentasi/' . $idKejadian);
     }
 
     // route : admin/kejadian/dokumentasi/(:num)
@@ -71,8 +68,8 @@ class Dokumentasi extends BaseController
         $idKejadian = $dokumentasi['idKejadian'];
         $file = $dokumentasi['file'];
         $this->DokumentasiModel->delete($id);
-        unlink('assets/uploads/galeri/'. $file);
+        unlink('assets/uploads/galeri/' . $file);
         session()->setFlashdata('msg-delete', 'Data berhasil dihapus!!!');
-        return redirect()->to('admin/kejadian/dokumentasi/'. $idKejadian);
+        return redirect()->to('admin/kejadian/dokumentasi/' . $idKejadian);
     }
 }

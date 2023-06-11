@@ -39,7 +39,7 @@ $routes->group('/auth', static function ($routes) {
 
 $routes->group('/admin', static function ($routes) {
     $routes->get('beranda', 'Admin\Beranda::index');
-
+    $routes->get('lokasi', 'Admin\Beranda::lokasi');
     // done
     $routes->group('kecamatan', static function ($routes) {
         $routes->get('/', 'Admin\Kecamatan::index');
