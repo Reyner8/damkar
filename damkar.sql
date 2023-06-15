@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2023 at 12:21 AM
+-- Generation Time: Jun 14, 2023 at 01:24 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -52,6 +52,13 @@ CREATE TABLE `dokumentasi` (
   `file` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `dokumentasi`
+--
+
+INSERT INTO `dokumentasi` (`id`, `idKejadian`, `file`) VALUES
+(1, 1, '1686422427_863dbc2a74f76dca20f2.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -68,8 +75,7 @@ CREATE TABLE `jabatan` (
 --
 
 INSERT INTO `jabatan` (`id`, `nama`) VALUES
-(1, 'Jabatan 1'),
-(2, 'Jabatan 2');
+(1, 'Jabatan 1');
 
 -- --------------------------------------------------------
 
@@ -100,6 +106,7 @@ INSERT INTO `kecamatan` (`id`, `nama`) VALUES
 
 CREATE TABLE `kejadian` (
   `id` int(11) NOT NULL,
+  `idKelurahan` int(11) NOT NULL DEFAULT 0,
   `alamat` text NOT NULL,
   `latitude` varchar(100) NOT NULL,
   `longitude` varchar(100) NOT NULL,
@@ -108,6 +115,14 @@ CREATE TABLE `kejadian` (
   `jamLapor` time NOT NULL,
   `jamTanggap` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kejadian`
+--
+
+INSERT INTO `kejadian` (`id`, `idKelurahan`, `alamat`, `latitude`, `longitude`, `penyebab`, `tanggal`, `jamLapor`, `jamTanggap`) VALUES
+(1, 2, 'Test', '-10.160078', '123.596733', 'asdsadasd', '2023-12-31', '12:59:00', '12:59:00'),
+(2, 3, 'test', '-10.160237', '123.595344', 'asdasdasdasd', '2023-06-04', '15:21:00', '15:21:00');
 
 -- --------------------------------------------------------
 
@@ -126,7 +141,9 @@ CREATE TABLE `kelurahan` (
 --
 
 INSERT INTO `kelurahan` (`id`, `idKecamatan`, `nama`) VALUES
-(2, 5, 'Kelurahan 1 K2');
+(2, 5, 'Kelurahan 1 K2'),
+(3, 7, 'Kelurahan 10'),
+(4, 5, 'kelurahan 2 K2');
 
 -- --------------------------------------------------------
 
@@ -138,9 +155,17 @@ CREATE TABLE `penugasan` (
   `id` int(11) NOT NULL,
   `idPetugas` int(11) NOT NULL,
   `idRegu` int(11) NOT NULL,
-  `idKejadian` int(11) DEFAULT NULL,
+  `idKejadian` int(11) NOT NULL,
   `tanggalPenugasan` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `penugasan`
+--
+
+INSERT INTO `penugasan` (`id`, `idPetugas`, `idRegu`, `idKejadian`, `tanggalPenugasan`) VALUES
+(1, 1, 1, 1, '2023-06-11'),
+(2, 1, 1, 2, '2023-06-18');
 
 -- --------------------------------------------------------
 
@@ -160,6 +185,13 @@ CREATE TABLE `petugas` (
   `alamat` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `petugas`
+--
+
+INSERT INTO `petugas` (`id`, `idJabatan`, `nama`, `jenisKelamin`, `tempatLahir`, `tanggalLahir`, `agama`, `nomorHp`, `alamat`) VALUES
+(1, 1, 'Reyner Neo', 'P', 'Kupang', '2023-12-31', 'katolik', '6612863', 'Hello WOrld');
+
 -- --------------------------------------------------------
 
 --
@@ -170,6 +202,13 @@ CREATE TABLE `regu` (
   `id` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `regu`
+--
+
+INSERT INTO `regu` (`id`, `nama`) VALUES
+(1, 'test regu');
 
 --
 -- Indexes for dumped tables
@@ -243,7 +282,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `dokumentasi`
 --
 ALTER TABLE `dokumentasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `jabatan`
@@ -261,31 +300,31 @@ ALTER TABLE `kecamatan`
 -- AUTO_INCREMENT for table `kejadian`
 --
 ALTER TABLE `kejadian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kelurahan`
 --
 ALTER TABLE `kelurahan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `penugasan`
 --
 ALTER TABLE `penugasan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `regu`
 --
 ALTER TABLE `regu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

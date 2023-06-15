@@ -82,7 +82,7 @@ function content(data) {
 					<h6>Kelurahan ${data.namaKelurahan}</h6>
 					<p>Alamat : ${data.alamat}</p>
 					<p>Penyebab : ${data.penyebab}</p>
-					<a href="http://localhost/admin/lokasi/detail/${data.id}">Detail</a>
+					<a href="http://localhost:8080/admin/lokasi/detail/${data.id}">Detail</a>
 				</div>
 			  </div>`;
 }

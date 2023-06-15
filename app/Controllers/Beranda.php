@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
@@ -27,28 +27,12 @@ class Beranda extends BaseController
 
     public function index()
     {
-        return view('admin/beranda', [
+        return view('beranda', [
             'judul' => 'Beranda',
             'listKejadian' => $this->KejadianModel->findAll(),
             'listKelurahan' => $this->KelurahanModel->findAll(),
             'listKecamatan' => $this->KecamatanModel->findAll(),
             'listPetugas' => $this->PetugasModel->findAll(),
-        ]);
-    }
-
-    public function lokasi()
-    {
-        $listKejadian = $this->RelationTable->getAllKejadian();
-        return $this->response->setJSON($listKejadian);
-    }
-
-    function detail($idKejadian)
-    {
-        return view('admin/detailmap', [
-            'judul' => 'Detail',
-            'kejadian' => $this->RelationTable->getKejadianById($idKejadian),
-            'listPenugasan' => $this->RelationTable->getPenugasanByIdKejadian($idKejadian),
-            'listDokumentasi' => $this->DokumentasiModel->where('idKejadian', $idKejadian)->findAll()
         ]);
     }
 }

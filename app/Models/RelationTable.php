@@ -72,8 +72,9 @@ class RelationTable
 
     public function getPenugasanByIdKejadian($id)
     {
-        return $this->db->table('penugasan')->select('penugasan.*, petugas.nama AS namaPetugas, regu.nama AS namaRegu, kejadian.alamat AS alamatKejadian')
+        return $this->db->table('penugasan')->select('penugasan.*, petugas.nama AS namaPetugas, petugas.nomorHp, jabatan.nama AS namaJabatan, regu.nama AS namaRegu, kejadian.alamat AS alamatKejadian')
             ->join('petugas', 'petugas.id = penugasan.idPetugas')
+            ->join('jabatan', 'jabatan.id = petugas.idJabatan')
             ->join('regu', 'regu.id = penugasan.idRegu')
             ->join('kejadian', 'kejadian.id = penugasan.idKejadian')
             ->where('penugasan.idKejadian', $id)

@@ -11,7 +11,7 @@ $routes = Services::routes();
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Auth');
+$routes->setDefaultController('beranda');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -31,6 +31,13 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 
 // $routes->get('/', 'Auth::index');
+$routes->get('/', 'Beranda::index');
+$routes->get('/kejadian', 'Kejadian::index');
+$routes->get('/kejadian/lokasi/(:num)', 'Kejadian::detail/$1');
+$routes->get('/kejadian/lokasi/peta', 'Lokasi::index');
+$routes->get('/petugas', 'Petugas::index');
+
+
 $routes->group('/auth', static function ($routes) {
     $routes->get('/', 'Auth::index');
     $routes->post('log/in', 'Auth::login');
@@ -39,7 +46,11 @@ $routes->group('/auth', static function ($routes) {
 
 $routes->group('/admin', static function ($routes) {
     $routes->get('beranda', 'Admin\Beranda::index');
-    $routes->get('lokasi', 'Admin\Beranda::lokasi');
+
+    $routes->group('lokasi', static function ($routes) {
+        $routes->get('/', 'Admin\Beranda::lokasi');
+        $routes->get('detail/(:num)', 'Admin\Beranda::detail/$1');
+    });
     // done
     $routes->group('kecamatan', static function ($routes) {
         $routes->get('/', 'Admin\Kecamatan::index');

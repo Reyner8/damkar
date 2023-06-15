@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-class Beranda extends BaseController
+class Lokasi extends BaseController
 {
 
     protected $KejadianModel;
@@ -27,8 +27,8 @@ class Beranda extends BaseController
 
     public function index()
     {
-        return view('admin/beranda', [
-            'judul' => 'Beranda',
+        return view('lokasi', [
+            'judul' => 'Lokasi',
             'listKejadian' => $this->KejadianModel->findAll(),
             'listKelurahan' => $this->KelurahanModel->findAll(),
             'listKecamatan' => $this->KecamatanModel->findAll(),
@@ -40,15 +40,5 @@ class Beranda extends BaseController
     {
         $listKejadian = $this->RelationTable->getAllKejadian();
         return $this->response->setJSON($listKejadian);
-    }
-
-    function detail($idKejadian)
-    {
-        return view('admin/detailmap', [
-            'judul' => 'Detail',
-            'kejadian' => $this->RelationTable->getKejadianById($idKejadian),
-            'listPenugasan' => $this->RelationTable->getPenugasanByIdKejadian($idKejadian),
-            'listDokumentasi' => $this->DokumentasiModel->where('idKejadian', $idKejadian)->findAll()
-        ]);
     }
 }
